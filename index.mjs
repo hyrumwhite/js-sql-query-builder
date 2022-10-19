@@ -33,7 +33,7 @@ const keyHandlers = {
 	},
 };
 
-const queryBuilder = (initialQuery) =>
+export const queryBuilder = (initialQuery) =>
 	new Proxy(
 		{ value: [initialQuery], objectBindings: {}, arrayBindings: [] },
 		{
@@ -46,14 +46,3 @@ const queryBuilder = (initialQuery) =>
 			},
 		}
 	);
-
-const query = queryBuilder();
-const color = "green";
-const count = 2;
-const colorQuery = query
-	.select("*")
-	.from("mydatabase")
-	.where("thing = :color", { color })
-	.and("otherthing = :count", { count });
-
-console.log(colorQuery.value, colorQuery.bindings);
